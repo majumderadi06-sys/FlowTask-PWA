@@ -1,37 +1,23 @@
-import { initializeApp } from 'firebase/app';
-import { getAuth, GoogleAuthProvider } from 'firebase/auth';
-import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
-import { getStorage } from 'firebase/storage';
+npm install firebase
 
-// Firebase config loaded from environment variables (.env)
-// Never commit real API keys — see .env.example for required keys
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
-  apiKey:            import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain:        import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId:         import.meta.env.VITE_FIREBASE_PROJECT_ID,
-  storageBucket:     import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId:             import.meta.env.VITE_FIREBASE_APP_ID,
+  apiKey: "AIzaSyCzUQ3O3G-ozHV-Wu4TeFLRaFbvqzPXFDA",
+  authDomain: "shop-manager-c9b19.firebaseapp.com",
+  projectId: "shop-manager-c9b19",
+  storageBucket: "shop-manager-c9b19.firebasestorage.app",
+  messagingSenderId: "765780872426",
+  appId: "1:765780872426:web:98210d4a4d427ca5059b93",
+  measurementId: "G-S4R5YHV8ER"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-
-// Initialize Services
-export const auth = getAuth(app);
-export const db = getFirestore(app);
-export const storage = getStorage(app);
-export const googleProvider = new GoogleAuthProvider();
-
-// Enable Offline Persistence
-if (typeof window !== 'undefined') {
-  enableIndexedDbPersistence(db).catch((err) => {
-    if (err.code === 'failed-precondition') {
-      console.warn('Multiple tabs open, persistence can only be enabled in one tab at a time.');
-    } else if (err.code === 'unimplemented') {
-      console.warn('The current browser does not support all of the features required to enable persistence');
-    }
-  });
-}
-
-export default app;
+const analytics = getAnalytics(app);
